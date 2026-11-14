@@ -4,12 +4,13 @@ An open-source diagnostic, profiling, and synthesis toolkit for analyzing and op
 
 ---
 
-## Overview
 
-In fault-tolerant quantum computing, non-Clifford gates (Toffoli, `CCZ`, `CSWAP`, and arbitrary `Z_POW` rotations) consume expensive magic states, while logical qubits require hundreds to thousands of physical qubits for error correction. 
+1. Fault-Tolerant Cost Model & Motivation
 
-This repository provides a standalone Python/Colab pipeline to inspect compiled `.kmb` binaries, audit qubit lifetimes, detect redundant gate patterns, and extract exact Boolean truth tables from reversible QROM/ANF subroutines without requiring proprietary tournament infrastructure.
-
+Circuit feasibility in fault-tolerant quantum computing (FTQC) centers on two key resource bottlenecks:
+• Magic State Distillation Overhead: Non-Clifford gates (CCX, CCZ, CSWAP) and arbitrary-angle phase rotations (Z_POW) require costly magic state factories, whereas Clifford gates (H, S, Z, CX, CZ) and Pauli measurements are nearly free.
+• Logical Qubit Footprint (\(Q\)): Each logical qubit demands hundreds to thousands of physical qubits under surface-code error correction, making peak memory width a primary space-time driver.
+---
 ### Key Capabilities
 
 * **Binary Circuit X-Ray (`inspect_kmb`):** Decompiles `.kmb` circuits into `.kmx` assembly to count exact Toffoli-equivalent costs, distinguish free Clifford/`T` rotations from expensive arbitrary-angle `Z_POW` gates, and measure classical branching (`PUSH_CONDITION`) and measurement-based uncomputation (`HMR`).
